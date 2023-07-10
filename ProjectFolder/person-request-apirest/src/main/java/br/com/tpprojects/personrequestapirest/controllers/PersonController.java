@@ -16,7 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+//@CrossOrigin - se colocado no controller fica global
 @RestController
 @RequestMapping("/api/person/v1")
 @Tag(name = "People", description = "Endpoints for Managing People")
@@ -46,7 +46,7 @@ public class PersonController {
             @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
             @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
             @ApiResponse(description = "Internal Error", responseCode = "500", content = @Content)})
-
+    @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML})
     public PersonVO findById(@PathVariable(value="id") Long id) {
         return service.findById(id);
@@ -58,7 +58,7 @@ public class PersonController {
                     @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
                     @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
                     @ApiResponse(description = "Internal Error", responseCode = "500", content = @Content)})
-
+    @CrossOrigin(origins = {"http://localhost:8080", "https://erudio.com.br"})
     @PostMapping(consumes = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML }, produces = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML })
     public PersonVO create(@RequestBody PersonVO person) {
         return service.create(person);
