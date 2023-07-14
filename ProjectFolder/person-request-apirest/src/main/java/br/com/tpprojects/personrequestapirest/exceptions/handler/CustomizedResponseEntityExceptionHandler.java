@@ -1,6 +1,7 @@
-package br.com.tpprojects.personrequestapirest.exceptions.customized;
+package br.com.tpprojects.personrequestapirest.exceptions.handler;
 
 import br.com.tpprojects.personrequestapirest.exceptions.ExceptionResponse;
+import br.com.tpprojects.personrequestapirest.exceptions.InvalidJwtAuthenticationException;
 import br.com.tpprojects.personrequestapirest.exceptions.RequiredObjectIsNullException;
 import br.com.tpprojects.personrequestapirest.exceptions.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -39,5 +40,13 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
 
         return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(InvalidJwtAuthenticationException.class)
+    public final ResponseEntity<ExceptionResponse> handleInvalidJwtAuthenticationExceptions(
+            Exception ex, WebRequest request) {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
+
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.FORBIDDEN);
     }
 }
