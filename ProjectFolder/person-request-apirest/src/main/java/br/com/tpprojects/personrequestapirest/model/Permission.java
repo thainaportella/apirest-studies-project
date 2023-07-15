@@ -15,9 +15,9 @@ public class Permission implements GrantedAuthority, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column
-    private String description;
+    private String description; //ADMIN, MANAGER, COMMON_USER
+
 
     public Permission() {} // é necessário um construtor vazio pro JPA
 

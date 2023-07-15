@@ -48,7 +48,6 @@ import java.util.List;
         return new TokenVO(username, true, now, validity, accessToken, refreshToken);
     }
 
-
     public TokenVO refreshToken(String refreshToken) {
         if (refreshToken.contains("Bearer ")) refreshToken =
                 refreshToken.substring("Bearer ".length());
@@ -71,6 +70,7 @@ import java.util.List;
                 .sign(algorithm)
                 .strip();
     }
+
     private String getRefreshToken(String username, List<String> roles, Date now) {
         Date validityRefreshToken = new Date(now.getTime() + validityInMilliseconds * 3);
         return JWT.create()

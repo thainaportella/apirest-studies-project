@@ -19,7 +19,7 @@ public class User implements UserDetails, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name="user_name", unique = true) //não pode ter mais de uma conta com o mesmo username
+    @Column(name="user_name", unique = true) //não pode ter mais de uma conta/cadastro com o mesmo username
     private String userName;
     @Column(name="full_name")
     private String fullName;
@@ -39,7 +39,8 @@ public class User implements UserDetails, Serializable {
     // como os atributos dela são poucos, é uma tabela simples e esses dois atributos
     // já foram definidos pela tabela Permission (id permission) e Users (id user), então
     // pode ser implementado na classe mais forte, nesse caso, a users
-    @ManyToMany(fetch = FetchType.EAGER) //hibernate - pesquisar o q é mais interessante entre o eager e o lazy
+    @ManyToMany(fetch = FetchType.EAGER)
+    //eager traz a lista todas as vezes e é mais demorado e custozo pro sistema, já o lazy traz só quando necessário
     @JoinTable(name= "user_permission", joinColumns = {@JoinColumn(name = "id_user")},
             inverseJoinColumns = {@JoinColumn(name = "id_permission")})
     private List<Permission> permissions;
