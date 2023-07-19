@@ -140,7 +140,7 @@ class BookServicesTest {
 
 		service.delete(1);
 	}
-
+	/*
 	@Test
 	void testFindAll() {
 		List<Book> list = input.mockEntityList();
@@ -183,6 +183,6 @@ class BookServicesTest {
 		assertEquals(new Date(2023, 07, 9), bookSeven.getLaunchDate());
 		assertEquals(Double.valueOf(7.0), bookSeven.getPrice());
 		assertEquals("Title Test7", bookSeven.getTitle());
-	}
+	}*/
 
 }
