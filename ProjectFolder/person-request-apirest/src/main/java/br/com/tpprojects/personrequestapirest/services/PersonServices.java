@@ -48,6 +48,18 @@ public class PersonServices {
         return assembler.toModel(personVoPage, link);
     }
 
+    public PagedModel<EntityModel<PersonVO>> findPersonsByName(String firstName, Pageable pageable) {
+
+        logger.info("Finding all people!");
+
+        var personPage = repository.findPersonsByName(firstName, pageable);
+        var personVoPage = personPage.map(p -> DozerMapper.parseObject(p, PersonVO.class));
+        personVoPage.map(p -> p.add(WebMvcLinkBuilder.linkTo(methodOn(PersonController.class).findById(p.getKey())).withSelfRel()));
+
+        Link link = linkTo(methodOn(PersonController.class).findAll(pageable.getPageNumber(), pageable.getPageSize(), "asc")).withSelfRel();
+        return assembler.toModel(personVoPage, link);
+    }
+
     public PersonVO findById(Long id) {
         logger.info("Finding a person!");
 
