@@ -140,49 +140,5 @@ class BookServicesTest {
 
 		service.delete(1);
 	}
-	/*
-	@Test
-	void testFindAll() {
-		List<Book> list = input.mockEntityList();
-
-		when(repository.findAll()).thenReturn(list);
-
-		var books = service.findAll();
-		assertNotNull(books);
-		assertEquals(14, books.size());
-
-		var bookOne = books.get(1);
-		assertNotNull(bookOne);
-		assertNotNull(bookOne.getKey());
-		assertNotNull(bookOne.getLinks());
-		System.out.println(bookOne.toString());
-		assertTrue(bookOne.toString().contains("links: [</api/book/v1/1>;rel=\"self\"]"));
-		assertEquals("Author Test1", bookOne.getAuthor());
-		assertEquals(new Date(2023, 07, 9), bookOne.getLaunchDate());
-		assertEquals(Double.valueOf(1.0), bookOne.getPrice());
-		assertEquals("Title Test1", bookOne.getTitle());
-
-		var bookFour = books.get(4);
-		assertNotNull(bookFour);
-		assertNotNull(bookFour.getKey());
-		assertNotNull(bookFour.getLinks());
-		System.out.println(bookFour.toString());
-		assertTrue(bookFour.toString().contains("links: [</api/book/v1/4>;rel=\"self\"]"));
-		assertEquals("Author Test4", bookFour.getAuthor());
-		assertEquals(new Date(2023, 07, 9), bookFour.getLaunchDate());
-		assertEquals(Double.valueOf(4.0), bookFour.getPrice());
-		assertEquals("Title Test4", bookFour.getTitle());
-
-		var bookSeven = books.get(7);
-		assertNotNull(bookSeven);
-		assertNotNull(bookSeven.getKey());
-		assertNotNull(bookSeven.getLinks());
-		System.out.println(bookSeven.toString());
-		assertTrue(bookSeven.toString().contains("links: [</api/book/v1/7>;rel=\"self\"]"));
-		assertEquals("Author Test7", bookSeven.getAuthor());
-		assertEquals(new Date(2023, 07, 9), bookSeven.getLaunchDate());
-		assertEquals(Double.valueOf(7.0), bookSeven.getPrice());
-		assertEquals("Title Test7", bookSeven.getTitle());
-	}*/
 
 }

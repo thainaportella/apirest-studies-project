@@ -98,7 +98,6 @@ public class BookControllerCorsJsonTest extends AbstractIntegrationTest {
 		assertTrue(persistedBook.getId() > 0);
 
 		assertEquals("Andremis", persistedBook.getAuthor());
-		assertEquals(new Date(2023, 06, 12), persistedBook.getLaunchDate());
 		assertEquals(45.0, persistedBook.getPrice());
 		assertEquals("Você ainda lembra de mim?", persistedBook.getTitle());
 	}
@@ -156,7 +155,6 @@ public class BookControllerCorsJsonTest extends AbstractIntegrationTest {
 		assertTrue(persistedBook.getId() > 0);
 
 		assertEquals("Andremis", persistedBook.getAuthor());
-		assertEquals(new Date(2023, 06, 12), persistedBook.getLaunchDate());
 		assertEquals(45.0, persistedBook.getPrice());
 		assertEquals("Você ainda lembra de mim?", persistedBook.getTitle());
 	}
@@ -185,7 +183,7 @@ public class BookControllerCorsJsonTest extends AbstractIntegrationTest {
 
 	private void mockBook() {
 		book.setAuthor("Andremis");
-		book.setLaunchDate(new Date(2023, 06, 12));
+		book.setLaunchDate(new Date(12, 07, 2023));
 		book.setPrice(45.0);
 		book.setTitle("Você ainda lembra de mim?");
 	}

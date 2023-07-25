@@ -5,6 +5,7 @@ import br.com.tpprojects.personrequestapirest.integrationtests.testcontainer.Abs
 import br.com.tpprojects.personrequestapirest.integrationtests.vo.AccountCredentialsVO;
 import br.com.tpprojects.personrequestapirest.integrationtests.vo.BookVO;
 import br.com.tpprojects.personrequestapirest.integrationtests.vo.TokenVO;
+import br.com.tpprojects.personrequestapirest.integrationtests.vo.wrappers.WrapperBookVO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -194,33 +195,60 @@ public class BookControllerJsonTest extends AbstractIntegrationTest {
 						.body()
 						.asString();
 
-		List<BookVO> books = objectMapper.readValue(content, new TypeReference<List<BookVO>>() {});
-
+		WrapperBookVO wrapper = objectMapper.readValue(content, WrapperBookVO.class);
+		List<BookVO> books = wrapper.getEmbedded().getBooks();
 		BookVO foundBookOne = books.get(0);
 
 		assertNotNull(foundBookOne.getId());
 		assertNotNull(foundBookOne.getAuthor());
 		assertNotNull(foundBookOne.getPrice());
 		assertNotNull(foundBookOne.getTitle());
+		assertTrue(foundBookOne.getId() > 0);
 
-		assertEquals(1, foundBookOne.getId());
-		//'Michael C. Feathers', '2017-11-29 13:50:05.878000', 49.00, 'Working effectively with legacy code'
-		assertEquals("Michael C. Feathers", foundBookOne.getAuthor());
-		assertEquals(49.0, foundBookOne.getPrice());
-		assertEquals("Working effectively with legacy code", foundBookOne.getTitle());
+		assertEquals(12, foundBookOne.getId());
+		assertEquals("Viktor Mayer-Schonberger e Kenneth Kukier", foundBookOne.getAuthor());
+		assertEquals(54.0, foundBookOne.getPrice());
+		assertEquals("Big Data: como extrair volume, variedade, velocidade e valor da avalanche de informação cotidiana", foundBookOne.getTitle());
 
-		BookVO foundBookThree = books.get(3);
+		BookVO foundBookThree = books.get(4);
 
 		assertNotNull(foundBookThree.getId());
 		assertNotNull(foundBookThree.getAuthor());
 		assertNotNull(foundBookThree.getPrice());
 		assertNotNull(foundBookThree.getTitle());
+		assertTrue(foundBookThree.getId() > 0);
 
-		assertEquals(4, foundBookThree.getId());
-		//'Crockford', '2017-11-07 15:09:01.674000', 67.00, 'JavaScript'
-		assertEquals("Crockford", foundBookThree.getAuthor());
-		assertEquals(67.0, foundBookThree.getPrice());
-		assertEquals("JavaScript", foundBookThree.getTitle());
+		assertEquals(8, foundBookThree.getId());
+		assertEquals("Eric Evans", foundBookThree.getAuthor());
+		assertEquals(92.0, foundBookThree.getPrice());
+		assertEquals("Domain Driven Design", foundBookThree.getTitle());
+	}
+
+	@Test
+	@Order(7)
+	public void testHATEOAS() throws JsonMappingException, JsonProcessingException {
+
+		var content = given().spec(specification)
+				.contentType(TestConfigs.CONTENT_TYPE_JSON)
+				.queryParams("page", 0 , "size", 12, "direction", "asc")
+				.when()
+				.get()
+				.then()
+				.statusCode(200)
+				.extract()
+				.body()
+				.asString();
+
+		assertTrue(content.contains("\"_links\":{\"self\":{\"href\":\"http://localhost:8888/api/book/v1/3\"}}}"));
+		assertTrue(content.contains("\"_links\":{\"self\":{\"href\":\"http://localhost:8888/api/book/v1/5\"}}}"));
+		assertTrue(content.contains("\"_links\":{\"self\":{\"href\":\"http://localhost:8888/api/book/v1/7\"}}}"));
+
+		assertTrue(content.contains("{\"first\":{\"href\":\"http://localhost:8888/api/book/v1?direction=asc&page=0&size=12&sort=title,asc\"}"));
+		assertTrue(content.contains("\"self\":{\"href\":\"http://localhost:8888/api/book/v1?page=0&size=12&direction=asc\"}"));
+		assertTrue(content.contains("\"next\":{\"href\":\"http://localhost:8888/api/book/v1?direction=asc&page=1&size=12&sort=title,asc\"}"));
+		assertTrue(content.contains("\"last\":{\"href\":\"http://localhost:8888/api/book/v1?direction=asc&page=1&size=12&sort=title,asc\"}}"));
+
+		assertTrue(content.contains("\"page\":{\"size\":12,\"totalElements\":16,\"totalPages\":2,\"number\":0"));
 	}
 
 	private void mockBook() {

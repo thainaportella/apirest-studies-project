@@ -46,7 +46,7 @@ public class DozerConverterBookTest {
         assertEquals(Integer.valueOf(7), outputSeven.getKey());
         assertEquals("Author Test7", outputSeven.getAuthor());
         assertEquals(new Date(2023, 07, 9), outputSeven.getLaunchDate());
-        assertEquals(Double.valueOf(0.0), outputSeven.getPrice());
+        assertEquals(Double.valueOf(7.0), outputSeven.getPrice());
         assertEquals("Title Test7", outputSeven.getTitle());
 
         BookVO outputTwelve = outputList.get(12);
@@ -54,7 +54,7 @@ public class DozerConverterBookTest {
         assertEquals(Integer.valueOf(12), outputTwelve.getKey());
         assertEquals("Author Test12", outputTwelve.getAuthor());
         assertEquals(new Date(2023, 07, 9), outputTwelve.getLaunchDate());
-        assertEquals(Double.valueOf(0.0), outputTwelve.getPrice());
+        assertEquals(Double.valueOf(12.0), outputTwelve.getPrice());
         assertEquals("Title Test12", outputTwelve.getTitle());
     }
 
@@ -84,7 +84,7 @@ public class DozerConverterBookTest {
         assertEquals(Integer.valueOf(7), outputSeven.getId());
         assertEquals("Author Test7", outputSeven.getAuthor());
         assertEquals(new Date(2023, 07, 9), outputSeven.getLaunchDate());
-        assertEquals(Double.valueOf(0.0), outputSeven.getPrice());
+        assertEquals(Double.valueOf(7.0), outputSeven.getPrice());
         assertEquals("Title Test7", outputSeven.getTitle());
 
         Book outputTwelve = outputList.get(12);
@@ -92,7 +92,7 @@ public class DozerConverterBookTest {
         assertEquals(Integer.valueOf(12), outputTwelve.getId());
         assertEquals("Author Test12", outputTwelve.getAuthor());
         assertEquals(new Date(2023, 07, 9), outputTwelve.getLaunchDate());
-        assertEquals(Double.valueOf(0.0), outputTwelve.getPrice());
+        assertEquals(Double.valueOf(12.0), outputTwelve.getPrice());
         assertEquals("Title Test12", outputTwelve.getTitle());
     }
 }
