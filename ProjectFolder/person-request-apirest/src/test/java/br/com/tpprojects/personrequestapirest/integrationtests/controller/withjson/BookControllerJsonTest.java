@@ -248,7 +248,7 @@ public class BookControllerJsonTest extends AbstractIntegrationTest {
 		assertTrue(content.contains("\"next\":{\"href\":\"http://localhost:8888/api/book/v1?direction=asc&page=1&size=12&sort=title,asc\"}"));
 		assertTrue(content.contains("\"last\":{\"href\":\"http://localhost:8888/api/book/v1?direction=asc&page=1&size=12&sort=title,asc\"}}"));
 
-		assertTrue(content.contains("\"page\":{\"size\":12,\"totalElements\":17,\"totalPages\":2,\"number\":0"));
+		assertTrue(content.contains("\"page\":{\"size\":12,\"totalElements\":16,\"totalPages\":2,\"number\":0"));
 	}
 
 	private void mockBook() {

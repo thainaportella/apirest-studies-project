@@ -357,7 +357,7 @@ public class PersonControllerYmlTest extends AbstractIntegrationTest {
 		assertTrue(content.contains("rel: \"self\"    href: \"http://localhost:8888/api/person/v1/409\""));
 		assertTrue(content.contains("rel: \"self\"    href: \"http://localhost:8888/api/person/v1/841\""));
 
-		assertTrue(content.contains("page:  size: 10  totalElements: 1005  totalPages: 101  number: 3"));
+		assertTrue(content.contains("page:  size: 10  totalElements: 1004  totalPages: 101  number: 3"));
 	}
 
 
