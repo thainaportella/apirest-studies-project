@@ -21,8 +21,10 @@ services:
   apirest-studies:
     image: thainaportella/apirest-studies
     restart: always
-    build: ./person-request-apirest
-    working_dir: ./person-request-apirest
+    build:
+      context: ./person-request-apirest
+      dockerfile: Dockerfile
+    working_dir: /person-request-apirest
     environment:
       TZ: America/Sao_Paulo
       SPRING.DATASOURCE.URL: jdbc:mysql://db:3308/apirest_studies?useTimezone=true&serverTimezone=UTC
